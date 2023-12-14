@@ -2,17 +2,14 @@ const tasti = document.querySelectorAll(".key");
 
 tasti.forEach( x => {
     x.addEventListener("click", () => {
-        x.classList.add("playing");
-        const audio = this.document.querySelector(`audio[data-key="${x.dataset.key}"]`);
-        audio.currentTime = 0;
-        audio.play();
+        playSound(x.dataset.key);       
     });
     
 });
 
 function playSound(e){
-    const audio = this.document.querySelector(`audio[data-key="${e.keyCode}"]`);
-    const tasto = this.document.querySelector(`div[data-key="${e.keyCode}"]`);
+    const audio = this.document.querySelector(`audio[data-key="${e}"]`);
+    const tasto = this.document.querySelector(`div[data-key="${e}"]`);
     if(!audio && !tasto) return;
     tasto.classList.add("playing");
     audio.currentTime = 0;
@@ -29,4 +26,6 @@ keys.forEach( key => {
     key.addEventListener('transitionend', removeTransition);
 });
 
-window.addEventListener('keydown', playSound);
+window.addEventListener('keydown', (e) => {
+    playSound(e.keyCode);
+});    
